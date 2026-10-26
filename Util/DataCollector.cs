@@ -27,7 +27,7 @@ namespace Windsock
                     continue;
                 }
 
-                string url = "https://api.weather.com/v1/geocode/" + latitude.ToString(CultureInfo.InvariantCulture) + "/" + longitude.ToString(CultureInfo.InvariantCulture) + "/forecast/daily/7day.json?units=e&language=en-US&apiKey=" + Uri.EscapeDataString(apiKey);
+                string url = "https://api.weather.com/v1/geocode/" + latitude.ToString(CultureInfo.InvariantCulture) + "/" + longitude.ToString(CultureInfo.InvariantCulture) + "/forecast/daily/10day.json?units=e&language=en-US&apiKey=" + Uri.EscapeDataString(apiKey);
 
                 try
                 {
