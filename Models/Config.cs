@@ -5,6 +5,7 @@ namespace Windsock
     public class Config
     {
         public NetworkConfig Network { get; set; } = new();
+        public string PlatformType { get; set; } = "wxscan_or_domestic";
         public ApiConfig API { get; set; } = new();
         public Timing Timing { get; set; } = new();
 
@@ -16,6 +17,9 @@ namespace Windsock
             Config config = new Config
             {
                 Network = json.RootElement.GetProperty("network").Deserialize<NetworkConfig>(options) ?? throw new InvalidOperationException("Network configuration is empty."),
+                PlatformType = json.RootElement.TryGetProperty("platformType", out JsonElement platformTypeEl) && platformTypeEl.ValueKind == JsonValueKind.String 
+                    ? platformTypeEl.GetString() ?? "wxscan_or_domestic" 
+                    : "wxscan_or_domestic",
                 API = json.RootElement.GetProperty("api").Deserialize<ApiConfig>(options) ?? throw new InvalidOperationException("API configuration is empty."),
                 Timing = json.RootElement.TryGetProperty("timing", out JsonElement timing) ? timing.Deserialize<Timing>(options) ?? throw new InvalidOperationException("Timing configuration is empty.") : new Timing()
             };
